@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/url_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="url" />
+
+    <EditText
+        android:id="@+id/url_edittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="inserisci il tuo url"
+        android:inputType="textUri"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/url_label" />
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/referral_spinner_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@+id/referral_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/url_edittext"
+        tools:text="referral" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/referral_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/referral_spinner_label">
+
+    </android.support.v7.widget.AppCompatSpinner>
+
+    <View
+        android:id="@+id/touch_blocker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/referral_spinner"
+        app:layout_constraintEnd_toEndOf="@id/referral_spinner"
+        app:layout_constraintStart_toStartOf="@id/referral_spinner"
+        app:layout_constraintTop_toTopOf="@id/referral_spinner" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/generate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/referral_spinner"
+        tools:text="Genera!" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/url_result"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="30dp"
+        android:textIsSelectable="true"
+        app:layout_constraintEnd_toStartOf="@+id/copy_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generate_button"
+        tools:text="result url" />
+
+    <ImageView
+        android:id="@+id/copy_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@android:drawable/btn_plus"
+        app:layout_constraintBottom_toBottomOf="@+id/url_result"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/url_result" />
+</android.support.constraint.ConstraintLayout>

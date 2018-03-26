@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RefGenerator</string>
+    <string name="refman_referral_add_error">Impossibile aggingere il referral, controlla i campi</string>
+    <string name="refman_referral_add_success">Aggiunto!</string>
+</resources>
