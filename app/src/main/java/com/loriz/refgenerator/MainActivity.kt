@@ -29,7 +29,7 @@ import com.loriz.refgenerator.utils.sendTextViaShare
 
 class MainActivity : AppCompatActivity() {
 
-    var intentUrl : String? = null
+    var intentUrl: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         if (Intent.ACTION_SEND == action && type != null) {
             if ("text/plain" == type) {
-               intentUrl = getFirstLinkInText(intent.getStringExtra(Intent.EXTRA_TEXT))
+                intentUrl = getFirstLinkInText(intent.getStringExtra(Intent.EXTRA_TEXT))
             }
         }
     }
@@ -136,7 +136,7 @@ class MainActivity : AppCompatActivity() {
         touch_blocker.visibility = View.VISIBLE
         touch_blocker.isClickable = true
 
-        var refList= getSharedPreferences("SP", Context.MODE_PRIVATE).all.keys
+        var refList = getSharedPreferences("SP", Context.MODE_PRIVATE).all.keys
 
         if (refList.size != 0) {
             touch_blocker.visibility = View.GONE
@@ -154,7 +154,6 @@ class MainActivity : AppCompatActivity() {
 
         super.onResume()
     }
-
 
 
 }

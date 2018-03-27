@@ -30,6 +30,8 @@ class ReferralListAdapter(val context: Context, refList: LinkedHashSet<String>) 
 
         holder.title.text = referralList[position]
 
+        holder.content.text =  context.getSharedPreferences("SP", Context.MODE_PRIVATE).getString(referralList[position], "")
+
         holder.deleteButton.setOnClickListener {
             AlertDialog.Builder(context)
                     .setMessage("Vuoi cancellare il referral \"${referralList[position]}\"?")
@@ -49,14 +51,15 @@ class ReferralListAdapter(val context: Context, refList: LinkedHashSet<String>) 
         return referralList.size
     }
 
-    open class ReferralViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var title: TextView = view.findViewById(R.id.viewholder_referral_entry_title)
-        var deleteButton: ImageView = view.findViewById(R.id.viewholder_referral_entry_delete_button)
-    }
-
     private fun removeEntry(context: Context, name: String) {
         context.getSharedPreferences("SP", Context.MODE_PRIVATE).edit().remove(name).commit()
         referralList.remove(name)
+    }
+
+    open class ReferralViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var title: TextView = view.findViewById(R.id.viewholder_referral_entry_title)
+        var content: TextView = view.findViewById(R.id.viewholder_referral_entry_content)
+        var deleteButton: ImageView = view.findViewById(R.id.viewholder_referral_entry_delete_button)
     }
 
 
