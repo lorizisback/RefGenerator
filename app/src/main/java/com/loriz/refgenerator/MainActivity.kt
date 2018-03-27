@@ -18,6 +18,8 @@ import android.widget.Toast
 import android.R.attr.label
 import android.content.ClipData
 import android.content.ClipboardManager
+import com.loriz.refgenerator.utils.getFirstLinkInText
+import com.loriz.refgenerator.utils.sendTextViaShare
 
 
 /**
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         if (Intent.ACTION_SEND == action && type != null) {
             if ("text/plain" == type) {
-               intentUrl = intent.getStringExtra(Intent.EXTRA_TEXT)  // Handle text being sent
+               intentUrl = getFirstLinkInText(intent.getStringExtra(Intent.EXTRA_TEXT))
             }
         }
     }
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 
         url_label.setText("URL")
 
-        url_edittext.setHint("Inserisci qui l'url")
+        url_edittext.setHint("Inserisci l'url")
 
         if (intentUrl != null) {
             url_edittext.setText(intentUrl)
@@ -95,8 +97,16 @@ class MainActivity : AppCompatActivity() {
             var link = getSharedPreferences("SP", Context.MODE_PRIVATE).getString(referral_spinner.selectedItem.toString(), "-1")
 
             if (link != "-1") {
+                url_result.visibility = View.VISIBLE
+                copy_icon.visibility = View.VISIBLE
+                share_icon.visibility = View.VISIBLE
+
                 url_result.setText(url_edittext.text.toString() + link)
+
             } else {
+                url_result.visibility = View.INVISIBLE
+                copy_icon.visibility = View.INVISIBLE
+                share_icon.visibility = View.INVISIBLE
                 Toast.makeText(this, "Referral non trovato!", Toast.LENGTH_SHORT).show()
             }
 
@@ -110,6 +120,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Copiato negli appunti!", Toast.LENGTH_SHORT).show()
 
         }
+
+        share_icon.setOnClickListener { sendTextViaShare(this, url_result.text.toString()) }
 
     }
 
@@ -136,5 +148,7 @@ class MainActivity : AppCompatActivity() {
 
         super.onResume()
     }
+
+
 
 }
