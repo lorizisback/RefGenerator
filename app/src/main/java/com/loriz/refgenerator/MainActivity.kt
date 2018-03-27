@@ -94,19 +94,25 @@ class MainActivity : AppCompatActivity() {
         generate_button.setText("Genera")
         generate_button.setOnClickListener {
 
-            var link = getSharedPreferences("SP", Context.MODE_PRIVATE).getString(referral_spinner.selectedItem.toString(), "-1")
+            if (referral_spinner.count != 0) {
 
-            if (link != "-1") {
-                url_result.visibility = View.VISIBLE
-                copy_icon.visibility = View.VISIBLE
-                share_icon.visibility = View.VISIBLE
 
-                url_result.setText(url_edittext.text.toString() + link)
+                var link = getSharedPreferences("SP", Context.MODE_PRIVATE).getString(referral_spinner.selectedItem.toString(), "-1")
 
+                if (link != "-1") {
+                    url_result.visibility = View.VISIBLE
+                    copy_icon.visibility = View.VISIBLE
+                    share_icon.visibility = View.VISIBLE
+
+                    url_result.setText(url_edittext.text.toString() + link)
+
+                } else {
+                    url_result.visibility = View.INVISIBLE
+                    copy_icon.visibility = View.INVISIBLE
+                    share_icon.visibility = View.INVISIBLE
+                    Toast.makeText(this, "Referral non trovato!", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                url_result.visibility = View.INVISIBLE
-                copy_icon.visibility = View.INVISIBLE
-                share_icon.visibility = View.INVISIBLE
                 Toast.makeText(this, "Referral non trovato!", Toast.LENGTH_SHORT).show()
             }
 
