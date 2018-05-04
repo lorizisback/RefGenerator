@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.loriz.refgenerator.adapter.ReferralListAdapter
@@ -54,7 +55,11 @@ class ReferralManager : AppCompatActivity() {
 
                 refman_name_edittext.setText("")
                 refman_link_edittext.setText("")
-
+                val view = this.currentFocus
+                if (view != null) {
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm!!.hideSoftInputFromWindow(view.windowToken, 0)
+                }
                 Toast.makeText(this, getString(R.string.refman_referral_add_success), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, getString(R.string.refman_referral_add_error), Toast.LENGTH_SHORT).show()

@@ -4,8 +4,13 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.content.Intent
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.loriz.refgenerator.utils.sendTextViaShare
+import kotlinx.android.synthetic.main.activity_fast_referral.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 /**
@@ -17,8 +22,11 @@ class FastShareActivity : AppCompatActivity() {
 
     lateinit var intentUrl: String
     lateinit var outUrl: String
+    var referralMap: HashMap<String, Any> = hashMapOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        referralMap = getSharedPreferences("SP", Context.MODE_PRIVATE).all as HashMap<String, Any>
 
         handleCreationByIntent()
 
@@ -45,22 +53,40 @@ class FastShareActivity : AppCompatActivity() {
     private fun handleUrlPreparation() {
         if (intentUrl.isNotBlank()) {
 
-            when (getSharedPreferences("SP", Context.MODE_PRIVATE).all.keys.size) {
+            when (referralMap.keys.size) {
                 0 -> {
                     Toast.makeText(this, "Nessun referral da aggiungere, impostalo nell'app!", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
                 1 -> {
-                    outUrl = intentUrl + (getSharedPreferences("SP", Context.MODE_PRIVATE).all.values.first() as String)
+                    outUrl = intentUrl + (referralMap.values.first() as String)
                     sendTextViaShare(this, outUrl)
+                    finish()
                 }
                 else -> {
-                    Toast.makeText(this, "Non ancora supportato!", Toast.LENGTH_SHORT).show()
+                    prepareFastReferralUI()
                 }
             }
 
-            finish()
-
         }
+    }
+
+    private fun prepareFastReferralUI() {
+        setContentView(R.layout.activity_fast_referral)
+
+        val dataAdapter = ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, referralMap.keys.toList())
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        fast_referral_spinner.setAdapter(dataAdapter)
+
+        fast_referral_generate_button.setOnClickListener {
+            with(referralMap[fast_referral_spinner.selectedItem as String]) {
+                sendTextViaShare(this@FastShareActivity, intentUrl + this)
+                finish()
+            }
+        }
+
+
     }
 
 }

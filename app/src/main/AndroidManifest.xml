@@ -5,7 +5,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -39,9 +39,9 @@
             android:name=".FastShareActivity"
             android:launchMode="singleTop"
             android:noHistory="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Translucent"
-            android:label="Fast referral via RefGenerator">
+            android:theme="@style/Theme.AppCompat.Dialog"
+            android:excludeFromRecents="true"
+            android:label="Fast Referral">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />

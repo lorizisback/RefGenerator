@@ -105,6 +105,7 @@ class MainActivity : AppCompatActivity() {
                     share_icon.visibility = View.VISIBLE
 
                     url_result.setText(url_edittext.text.toString() + link)
+                    url_edittext.setText("")
 
                 } else {
                     url_result.visibility = View.INVISIBLE
